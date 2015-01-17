@@ -68,7 +68,7 @@ namespace EventStore.ClientAPI
                 connectionSettings.OperationTimeoutCheckPeriod,credential,connectionSettings.UseSslConnection,connectionSettings.TargetHost, 
                 connectionSettings.ValidateServer, connectionSettings.FailOnNoServerResponse, connectionSettings.HeartbeatInterval, connectionSettings.HeartbeatTimeout,
                 connectionSettings.ClientConnectionTimeout, connectionSettings.ClusterDns, connectionSettings.GossipSeeds, connectionSettings.MaxDiscoverAttempts,
-                connectionSettings.ExternalGossipPort, connectionSettings.GossipTimeout);
+                connectionSettings.ExternalGossipPort, connectionSettings.GossipTimeout, connectionSettings.FailOnNoConnection);
             }
             if (scheme == "discover")
             {

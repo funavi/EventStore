@@ -89,6 +89,12 @@ namespace EventStore.ClientAPI
         /// Whether or not to raise an error if no response is received from the server for an operation.
         /// </summary>
         public readonly bool FailOnNoServerResponse;
+
+        /// <summary>
+        /// Whether or not to raise an error if no connection made to the server.
+        /// </summary>
+        public readonly bool FailOnNoConnection;
+
         /// <summary>
         /// The interval at which to send heartbeat messages.
         /// </summary>
@@ -148,7 +154,8 @@ namespace EventStore.ClientAPI
                                     GossipSeed[] gossipSeeds,
                                     int maxDiscoverAttempts, 
                                     int externalGossipPort, 
-                                    TimeSpan gossipTimeout)
+                                    TimeSpan gossipTimeout,
+                                    bool failOnNoConnection)
         {
             Ensure.NotNull(log, "log");
             Ensure.Positive(maxQueueSize, "maxQueueSize");
@@ -183,6 +190,8 @@ namespace EventStore.ClientAPI
             MaxDiscoverAttempts = maxDiscoverAttempts;
             ExternalGossipPort = externalGossipPort;
             GossipTimeout = gossipTimeout;
+
+            FailOnNoConnection = failOnNoConnection;
         }
     }
 }

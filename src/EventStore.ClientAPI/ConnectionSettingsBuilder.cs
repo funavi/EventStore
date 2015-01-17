@@ -32,6 +32,7 @@ namespace EventStore.ClientAPI
         private bool _validateServer;
 
         private bool _failOnNoServerResponse;
+        private bool _failOnNoConnection;
         private TimeSpan _heartbeatInterval = TimeSpan.FromMilliseconds(750);
         private TimeSpan _heartbeatTimeout = TimeSpan.FromMilliseconds(1500);
         private TimeSpan _clientConnectionTimeout = TimeSpan.FromMilliseconds(1000);
@@ -273,6 +274,15 @@ namespace EventStore.ClientAPI
         }
 
         /// <summary>
+        /// Whether or not to raise an error if no connection made to the server.
+        /// </summary>
+        public ConnectionSettingsBuilder FailOnNoConnection()
+        {
+            _failOnNoConnection = true;
+            return this;
+        }
+
+        /// <summary>
         /// Sets how often heartbeats should be expected on the connection (lower values detect broken sockets faster)
         /// </summary>
         /// <param name="interval"></param>
@@ -440,7 +450,8 @@ namespace EventStore.ClientAPI
                                           _gossipSeeds,
                                           _maxDiscoverAttempts,
                                           _gossipExternalHttpPort,
-                                          _gossipTimeout);
+                                          _gossipTimeout,
+                                          _failOnNoConnection);
         }
 
     }
